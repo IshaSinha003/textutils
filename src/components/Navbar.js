@@ -20,7 +20,7 @@ export default function Navbar(props) {
       <li className="nav-item">
         <Link className="nav-link" to="/about">{props.aboutText}</Link>
       </li>
-      
+
     </ul>
     <div className="d-flex">
       <div className="bg-primary rounded mx-2" onClick={()=>{props.toggleMode('primary')}} style={{height: '30px',width: '30px', cursor: 'pointer'}}></div>
