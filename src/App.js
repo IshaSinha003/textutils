@@ -1,16 +1,15 @@
 
 import { useState } from 'react';
 import './App.css';
-// import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/Textform';
 import Alert from './components/Alert';
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Link,
-//   Routes
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState('light'); 
@@ -27,7 +26,18 @@ function App() {
 
   }
 
-  const toggleMode = ()=>{
+  const removeBodyClasses = ()=>{
+    document.body.classList.remove('bg-light')
+    document.body.classList.remove('bg-dark')
+    document.body.classList.remove('bg-warning')
+    document.body.classList.remove('bg-success')
+    document.body.classList.remove('bg-danger')
+  }
+
+  const toggleMode = (cls)=>{
+    removeBodyClasses();
+    console.log(cls)
+    document.body.classList.add('bg-'+cls)
     if(mode === 'light'){
       setMode('dark');
       document.body.style.backgroundColor = 'grey';
@@ -43,21 +53,21 @@ function App() {
   
   return (
   <>
-  {/* <Router> */}
+  <Router>
 
   <Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode}/> 
   <Alert alert={alert}/>
  {/* <Navbar/> */}
  <div className="container my-3">
- <TextForm showAlert={showAlert} heading="Enter the text here to analyse below" mode={mode}/>
- {/* <Routes>
-          <Route path="/about" element={<About />} />
-          <Route path="/" element={<TextForm showAlert={showAlert} heading="Enter the text here to analyse below" mode={mode}/>}/>  
-  </Routes> */}
+ {/* <TextForm showAlert={showAlert} heading="Enter the text here to analyse below" mode={mode}/> */}
+ <Routes>
+          <Route path="/about" element={<About mode={mode}/>} />
+          <Route path="/" element={<TextForm showAlert={showAlert} heading="Try Textutils - word counter , character counter, Remove extra spaces" mode={mode}/>}/>  
+  </Routes>
 
  </div>
 
- {/* </Router> */}
+ </Router>
   
   
 </>
